@@ -1,0 +1,11 @@
+.input-group.p-3
+    textarea.form-control.custom-control('
+    [(ngModel)]'='message'
+    '(keyup.enter)'="sendMessages()" 
+    '(ngModelChange)'="textChange($event)" 
+    placeholder="Напишите сообщение..." 
+    #searchInput 
+    autosize)
+    span.input-group-addon.btn.rounded-0.bg-white.border-0.text-primary.d-flex.align-items-end
+        i.far.fa-paper-plane.send-icon('*ngIf'="!boolUpdateMessage" '(click)'='sendMessages()')
+        i.far.fa-check-circle.send-icon('*ngIf'="boolUpdateMessage" '(click)'='updateMessages()')

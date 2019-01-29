@@ -1,0 +1,20 @@
+.container-fluid
+    .row.justify-content-md-center
+        .col-12.login-head-bg
+        .col-sm-12.col-md-3.box-auth.p-4.m-3
+            .form-group
+                h5.text-muted.text-center Чат онлайн
+                input.form-control.mt-3(
+                    type="text" 
+                    placeholder="Введите имя"
+                    '[(ngModel)]'='user.name' 
+                    '[class.is-invalid]'="validUserName(user.name)" 
+                )
+                small.form-text.text-danger('*ngIf'="validUserName(user.name)") Ошибка имени
+                button.btn.btn-primary.btn-block.mt-3(
+                    type="button" 
+                    routerLink="/chat" 
+                    '(click)'="createUser()" 
+                    '[disabled]'="validUserName(user.name) || user.name.length == 0"
+                ) Перейти в чат 
+                    i.pl-2.fa.fa-chevron-right

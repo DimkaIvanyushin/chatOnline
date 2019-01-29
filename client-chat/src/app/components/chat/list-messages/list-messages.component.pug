@@ -1,0 +1,26 @@
+.messages.overflow-auto(#containerMessages)
+    p.d-flex.p-3.text-center.text-muted( *ngIf="messages.length === 0") Сообщений нет!
+    div.container-messages
+        .message.flex-column.align-items-start.p-3(
+            '*ngFor'="let message of messages;" 
+            '[ngClass]'="{ update: message.update, smallText: !message.fullMessage }"
+            '(mouseenter)'="message.showButton = true"
+            '(mouseleave)'="message.showButton = false"
+            #messge )
+            div.d-flex.bd-highlight
+                strong.mb-1.mr-auto.bd-highlight {{ message.name }}
+                span.bd-highlight('*ngIf'="message.showButton")
+                    i.but-icon.fa.fa-edit.mr-2(
+                        '*ngIf'="showIcon(message)"
+                        '(click)'="editMessage(message)")
+                    i.but-icon.fa.fa-trash.mr-2(
+                        '*ngIf'="showIcon(message)"
+                        '(click)'="deleteMessage(message)")
+                small.bd-highlight {{ message.date | date:'HH:mm:ss'}}
+            small('[innerHTML]'="message.message | smile") 
+            div.d-flex.flex-row-reverse(*ngIf="message.message.length > 120")
+                i.fas.button-full-text(
+                    '(click)'="showFullMEssage(message)"
+                    '[class.fa-arrow-down]'="!message.fullMessage" 
+                    '[class.fa-arrow-up]'="message.fullMessage")
+            small.text-muted.d-flex.flex-row-reverse('*ngIf'="message.update") Сообщение отредактировано!

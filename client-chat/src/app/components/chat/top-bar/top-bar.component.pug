@@ -1,0 +1,15 @@
+.top-bar.flex-column.align-items-start
+    .d-flex.w-100.justify-content-between.align-items-center.p-2.pl-3.pr-3.text-white
+        strong.mb-1 {{user.name }}
+
+        .form-group.d-flex.align-items-center.row.m-0
+            label.col-2.col-form-label
+                i.fas.fa-search.pr-3('*ngIf'="searchMessageText.length === 0")
+                i.fas.fa-times.pr-3(
+                    '*ngIf'="searchMessageText.length > 0" 
+                    '(click)'="searchMessageText = ''")
+            .col-10.p-0
+                input.form-control.form-control-sm.bg-white.border-0(
+                    '[(ngModel)]'="searchMessageText" 
+                    type="text" 
+                    placeholder="Поиск")

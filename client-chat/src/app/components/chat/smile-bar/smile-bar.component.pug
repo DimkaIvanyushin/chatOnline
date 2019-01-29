@@ -1,0 +1,5 @@
+div.box-smile.d-flex.align-items-center.pl-3.pr-3.pt-2
+    i.smile-item(
+        '*ngFor'="let smile of smiles" 
+        '[innerHTML]'="smile.text | smile" 
+        '(click)'="addInputSmile(smile)") 

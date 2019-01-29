@@ -1,0 +1,18 @@
+.list-users.h-100
+    .list-group.box.overflow-auto
+        div.list-group-item.list-group-item-action.flex-column.align-items-start.list-user(
+        '*ngFor'="let user of users" 
+        '[ngClass]'="{ offline: !user.online, online: user.online }"
+        '(mouseenter)'="user.showButton = true"
+        '(mouseleave)'="user.showButton = false"
+        )
+            div.d-flex.w-100 {{ checkUserFriend(user) }}
+                span.buttonIcon
+                    i.fas.fa-user-check('*ngIf'="user.checkFriend " '[ngClass]'="{active: user.online}")
+                    i.fas.fa-user('*ngIf'="!user.checkFriend ")
+                span.pl-2 {{ user.name }}
+                small.ml-auto('*ngIf'="!user.showButton") {{ user.date | date:'HH:mm'}}
+                span.ml-auto.buttonIcon('*ngIf'="user.showButton && !checkName(user)")
+                    i.fas.fa-check('*ngIf'="!user.checkFriend " '[ngClass]'="{active: user.online}" '(click)'="addFriend(user)")
+                    i.fas.fa-times('*ngIf'="user.checkFriend " '[ngClass]'="{delete: user.online}" '(click)'="deleteFriend(user)")
+        p.d-flex.p-3.text-center.text-muted( *ngIf="users.length === 0") Поиск не дал результатов!
